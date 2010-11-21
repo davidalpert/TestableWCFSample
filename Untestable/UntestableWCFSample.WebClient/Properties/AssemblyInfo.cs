@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Untestable.WCFSample.WebClient")]
+[assembly: AssemblyTitle("UntestableWCFSample.WebClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Untestable.WCFSample.WebClient")]
+[assembly: AssemblyProduct("UntestableWCFSample.WebClient")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b1107e27-90fe-4b59-8fb9-31a9ca198b59")]
+[assembly: Guid("33c705dd-12a7-4f4f-a0cd-d5f2dce63dba")]
 
 // Version information for an assembly consists of the following four values:
 //

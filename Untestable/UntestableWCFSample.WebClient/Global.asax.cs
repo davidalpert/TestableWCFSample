@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Untestable.WCFSample.WebClient
+namespace UntestableWCFSample.WebClient
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -15,6 +15,12 @@ namespace Untestable.WCFSample.WebClient
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "ProductsByCategory",
+                "products/{categoryId}",
+                new { controller = "Catalog", action = "Products", categoryId = "" }
+            );
 
             routes.MapRoute(
                 "Default",                                              // Route name
