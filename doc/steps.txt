@@ -1,0 +1,2 @@
+D:\TestableWCFSample\Untestable\UntestableWCFSample.WebClient>svcutil.exe http://localhost:46528/CatalogService.svc?wsdl /ixt /config:Web.config /mergeConfig
+
