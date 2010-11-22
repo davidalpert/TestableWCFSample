@@ -15,10 +15,21 @@ namespace UntestableWCFSample.WebClient.Controllers
             ProductsForCategoryViewModel model = new ProductsForCategoryViewModel
             {
                 CategoryName = String.Format("Category #{0}", categoryID.Value),
-                Products = new List<string>()
+                Products = LoadProductsFor(categoryID)
             };
 
             return View(model);
+        }
+
+        private IList<string> LoadProductsFor(int? categoryID)
+        {
+            CatalogServiceClient catalogService = new CatalogServiceClient();
+
+            IList<string> products = catalogService.GetProducts(categoryID.Value);
+
+            catalogService.Close();
+
+            return products;
         }
     }
 }
