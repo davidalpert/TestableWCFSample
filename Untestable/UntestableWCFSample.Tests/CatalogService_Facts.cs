@@ -24,5 +24,15 @@ namespace UntestableWCFSample.Tests
         {
             CatalogController controller = new CatalogController();
         }
+
+        [Fact]
+        public void can_call_Products()
+        {
+            CatalogController controller = new CatalogController();
+
+            var result = controller.Products(3);
+
+            Assert.NotNull(result);
+        }
     }
 }
