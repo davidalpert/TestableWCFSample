@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator.NinjectAdapter;
+using Ninject;
 
 namespace UntestableWCFSample.WebClient
 {
@@ -15,6 +18,10 @@ namespace UntestableWCFSample.WebClient
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            // this allows us to avoid loading the favicon.icoController w/o 
+            // customizing our simple CommonServiceLocatorControllerBuilder.
+            routes.IgnoreRoute("favicon.ico"); 
 
             routes.MapRoute(
                 "ProductsByCategory",
@@ -35,6 +42,16 @@ namespace UntestableWCFSample.WebClient
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            ControllerBuilder.Current.SetControllerFactory(new CommonServiceLocatorControllerFactory());
+
+            RegisterDependencies();
+        }
+
+        private void RegisterDependencies()
+        {
+            IKernel kernel = new StandardKernel();
+            ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(kernel));
         }
     }
 }
