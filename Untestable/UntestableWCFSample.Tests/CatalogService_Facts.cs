@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
+using System.Collections;
+using UntestableWCFSample.WebClient.Controllers;
 
 namespace UntestableWCFSample.Tests
 {
@@ -12,6 +14,15 @@ namespace UntestableWCFSample.Tests
         public void can_create()
         {
             CatalogServiceClient serviceClient = new CatalogServiceClient();
+        }
+    }
+
+    public class CatalogController_Facts
+    {
+        [Fact]
+        public void can_create()
+        {
+            CatalogController controller = new CatalogController();
         }
     }
 }
