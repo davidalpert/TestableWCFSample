@@ -8,6 +8,17 @@ namespace UntestableWCFSample.WebClient.Controllers
     [HandleError]
     public class CatalogController : Controller
     {
+        CatalogServiceClient catalogServiceClient;
+
+        /// <summary>
+        /// Initializes a new instance of the CatalogController class.
+        /// </summary>
+        /// <param name="catalogServiceClient"></param>
+        public CatalogController(CatalogServiceClient catalogServiceClient)
+        {
+            this.catalogServiceClient = catalogServiceClient;
+        }
+
         public ActionResult Products(int? categoryID)
         {
             categoryID = categoryID ?? 1;
