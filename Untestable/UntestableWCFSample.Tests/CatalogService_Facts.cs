@@ -28,6 +28,8 @@ namespace UntestableWCFSample.Tests
         [Fact]
         public void can_call_Products()
         {
+            ICatalogService catalogService = new CatalogServiceClient();
+
             CatalogController controller = new CatalogController();
 
             var result = controller.Products(3);
