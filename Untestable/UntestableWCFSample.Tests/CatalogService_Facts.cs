@@ -22,13 +22,15 @@ namespace UntestableWCFSample.Tests
         [Fact]
         public void can_create()
         {
-            CatalogController controller = new CatalogController();
+            CatalogServiceClient serviceClient = null;
+            CatalogController controller = new CatalogController(serviceClient);
         }
 
         [Fact]
         public void can_call_Products()
         {
-            CatalogController controller = new CatalogController();
+            CatalogServiceClient serviceClient = null;
+            CatalogController controller = new CatalogController(serviceClient);
 
             var result = controller.Products(3);
 
