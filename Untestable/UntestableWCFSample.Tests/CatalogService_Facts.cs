@@ -23,7 +23,7 @@ namespace UntestableWCFSample.Tests
         [Fact]
         public void can_create()
         {
-            CatalogServiceClient serviceClient = null;
+            ICatalogService serviceClient = null;
             CatalogController controller = new CatalogController(serviceClient);
         }
 

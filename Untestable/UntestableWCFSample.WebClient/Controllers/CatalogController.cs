@@ -8,13 +8,13 @@ namespace UntestableWCFSample.WebClient.Controllers
     [HandleError]
     public class CatalogController : Controller
     {
-        CatalogServiceClient catalogService;
+        ICatalogService catalogService;
 
         /// <summary>
         /// Initializes a new instance of the CatalogController class.
         /// </summary>
         /// <param name="catalogService"></param>
-        public CatalogController(CatalogServiceClient catalogService)
+        public CatalogController(ICatalogService catalogService)
         {
             this.catalogService = catalogService;
         }
@@ -36,7 +36,8 @@ namespace UntestableWCFSample.WebClient.Controllers
         {
             IList<string> products = catalogService.GetProducts(categoryID.Value);
 
-            catalogService.Close();
+            //catalogService.Close(); // uh-oh; 
+            throw new NotSupportedException("Can't close the WCF connection via the default service client interface!");
 
             return products;
         }
