@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
+using Moq;
 using System.Collections;
 using UntestableWCFSample.WebClient.Controllers;
 
@@ -29,8 +30,9 @@ namespace UntestableWCFSample.Tests
         [Fact]
         public void can_call_Products()
         {
-            CatalogServiceClient serviceClient = null;
-            CatalogController controller = new CatalogController(serviceClient);
+            Mock<CatalogServiceClient> mock = new Mock<CatalogServiceClient>();
+
+            CatalogController controller = new CatalogController(mock.Object);
 
             var result = controller.Products(3);
 
