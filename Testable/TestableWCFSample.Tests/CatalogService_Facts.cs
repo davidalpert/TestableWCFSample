@@ -6,6 +6,8 @@ using Xunit;
 using Moq;
 using System.Collections;
 using TestableWCFSample.WebClient.Controllers;
+using System.Web.Mvc;
+using TestableWCFSample.WebClient.ViewModels;
 
 namespace TestableWCFSample.Tests
 {
@@ -39,6 +41,32 @@ namespace TestableWCFSample.Tests
             var result = controller.Products(3);
 
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void calling_Products_will_render_a_view()
+        {
+            // Arrange
+            Mock<ICatalogServiceClient> clientMock = new Mock<ICatalogServiceClient>();
+            clientMock.Setup(catalogService => catalogService.GetProducts(It.IsAny<int>())).Returns(new string[] {"mal", "wash", "zoe" });
+            Mock<ICatalogServiceClientFactory> clientFactoryMock = new Mock<ICatalogServiceClientFactory>();
+            clientFactoryMock.Setup(factory => factory.BuildCatalogServiceClient()).Returns(clientMock.Object);
+
+            CatalogController controller = new CatalogController(clientFactoryMock.Object);
+
+            // Act
+            ActionResult result = controller.Products(3);
+
+            // Assert
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            Assert.NotNull(viewResult);
+
+            var model = Assert.IsType<ProductsForCategoryViewModel>(viewResult.ViewData.Model);
+            Assert.Equal("Category #3", model.CategoryName);
+            Assert.Equal(3, model.Products.Count);
+            Assert.Equal("mal", model.Products[0]);
+            Assert.Equal("wash", model.Products[1]);
+            Assert.Equal("zoe", model.Products[2]);
         }
     }
 }
