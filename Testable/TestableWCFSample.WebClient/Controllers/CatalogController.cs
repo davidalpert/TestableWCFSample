@@ -8,15 +8,15 @@ namespace TestableWCFSample.WebClient.Controllers
     [HandleError]
     public class CatalogController : Controller
     {
-        ICatalogService catalogService;
+        ICatalogServiceClientFactory catalogServiceClientFactory;
 
         /// <summary>
         /// Initializes a new instance of the CatalogController class.
         /// </summary>
-        /// <param name="catalogService"></param>
-        public CatalogController(ICatalogService catalogService)
+        /// <param name="catalogServiceClientFactory"></param>
+        public CatalogController(ICatalogServiceClientFactory catalogServiceClientFactory)
         {
-            this.catalogService = catalogService;
+            this.catalogServiceClientFactory = catalogServiceClientFactory;
         }
 
         public ActionResult Products(int? categoryID)
@@ -34,10 +34,14 @@ namespace TestableWCFSample.WebClient.Controllers
 
         private IList<string> LoadProductsFor(int? categoryID)
         {
+            ICatalogServiceClient catalogService = catalogServiceClientFactory.BuildCatalogServiceClient();
+
             IList<string> products = catalogService.GetProducts(categoryID.Value);
 
-            //catalogService.Close(); // uh-oh; 
-            throw new NotSupportedException("Can't close the WCF connection via the default service client interface!");
+            // now we can take responsibility for closing the connection 
+            // as per the guidance, but this time via the easily mockable 
+            // interface.
+            catalogService.Close(); 
 
             return products;
         }

@@ -23,16 +23,18 @@ namespace TestableWCFSample.Tests
         [Fact]
         public void can_create()
         {
-            ICatalogService serviceClient = null;
-            CatalogController controller = new CatalogController(serviceClient);
+            ICatalogServiceClientFactory catalogServiceClientFactory = null;
+            CatalogController controller = new CatalogController(catalogServiceClientFactory);
         }   
 
         [Fact]
         public void can_call_Products()
         {
-            Mock<CatalogServiceClient> mock = new Mock<CatalogServiceClient>();
+            Mock<ICatalogServiceClient> clientMock = new Mock<ICatalogServiceClient>();
+            Mock<ICatalogServiceClientFactory> clientFactoryMock = new Mock<ICatalogServiceClientFactory>();
+            clientFactoryMock.Setup(factory => factory.BuildCatalogServiceClient()).Returns(clientMock.Object);
 
-            CatalogController controller = new CatalogController(mock.Object);
+            CatalogController controller = new CatalogController(clientFactoryMock.Object);
 
             var result = controller.Products(3);
 
