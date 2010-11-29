@@ -52,7 +52,7 @@ namespace TestableWCFSample.WebClient
         {
             IKernel kernel = new StandardKernel();
 
-            kernel.Bind<ICatalogService>().To<CatalogServiceClient>();
+            kernel.Bind<ICatalogServiceClientFactory>().To<CatalogServiceClientFactory>();
 
             ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(kernel));
         }
