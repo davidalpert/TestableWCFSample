@@ -25,7 +25,7 @@ namespace TestableWCFSample.Tests
         {
             ICatalogService serviceClient = null;
             CatalogController controller = new CatalogController(serviceClient);
-        }
+        }   
 
         [Fact]
         public void can_call_Products()
