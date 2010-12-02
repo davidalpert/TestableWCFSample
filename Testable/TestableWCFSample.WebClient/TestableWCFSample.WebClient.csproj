@@ -80,7 +80,11 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ServiceClients\CatalogService.cs" />
-    <Compile Include="ServiceClients\CatalogServiceWrappers.cs" />
+    <Compile Include="ServiceClients\TestableWCFAbstractions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestableWCFAbstractions.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ProductsForCategoryViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -110,6 +114,15 @@
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ServiceClients\TestableWCFAbstractions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestableWCFAbstractions.cs</LastGenOutput>
+    </None>
+    <None Include="T4\MultipleFilesManager.ttinclude">
+      <LastGenOutput>MultipleFilesManager.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
