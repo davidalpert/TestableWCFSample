@@ -43,6 +43,8 @@ bool generateLogOutput = generateIndividualFiles;
 	bool requireUsing = String.IsNullOrEmpty(serviceClientNamespace) == false 
 	                 && serviceClientNamespace != wrapperNamespace;
 	                 
+	bool ServiceModelUsingIsRendered = false;
+	                 
 	// At the start of every generated file we need to write 
 	// the using and namespace declaration, if needed:
 	manager.StartHeader(); #>
@@ -87,10 +89,15 @@ bool generateLogOutput = generateIndividualFiles;
 <# }
 
 	// Component #1 ----------------------------------------------------------
-	manager.StartNewFile(clientInterface+".generated.cs"); #>
+	manager.StartNewFile(clientInterface+".generated.cs"); 
+	
+	if (ServiceModelUsingIsRendered == false) { #>
 	using System.ServiceModel;
 
-<# if (includeComments) { #>
+<#		ServiceModelUsingIsRendered = true;
+	}
+	
+	if (includeComments) { #>
 /// <summary>
 /// Wraps the <see cref="<#= serviceInterface#>"/> interface and 
 /// the <see cref="ICommunicationObject"/> interface 
