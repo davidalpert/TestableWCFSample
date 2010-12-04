@@ -2,6 +2,9 @@
 
 	using System.ServiceModel;
 
+// ----------------------------------------------------------------------------	
+// CatalogServiceClient abstractions
+// ----------------------------------------------------------------------------	
 public interface ICatalogServiceClient : ICatalogService, ICommunicationObject
 {
 }

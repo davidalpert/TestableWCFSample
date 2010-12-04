@@ -97,6 +97,12 @@ bool generateLogOutput = generateIndividualFiles;
 <#		ServiceModelUsingIsRendered = true;
 	}
 	
+	if (generateIndividualFiles == false) { #>
+// ----------------------------------------------------------------------------	
+// <#= serviceClient #> abstractions
+// ----------------------------------------------------------------------------	
+<#	}
+	
 	if (includeComments) { #>
 /// <summary>
 /// Wraps the <see cref="<#= serviceInterface#>"/> interface and 
