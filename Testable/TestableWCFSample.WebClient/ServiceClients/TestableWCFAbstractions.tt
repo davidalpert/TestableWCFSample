@@ -14,7 +14,7 @@ var wrapperNamespace = "";
 // 3. Add the names of each service that you want 
 //    to wrap into the following list:
 var serviceClientNames = new List<string>() {
-	"CatalogService"
+	"CatalogService",
 };
 
 // 4. Customize the generated file format:
@@ -74,14 +74,14 @@ bool generateLogOutput = generateIndividualFiles;
 	foreach (string serviceName in serviceClientNames) {
 
 	// generate the names of the ServiceClient components:
-	var serviceInterface = "I"+serviceName;
-	var serviceClient = serviceName+"Client";
+	string serviceInterface =	 	"I"+serviceName;			// e.g. ICatalogService
+	string serviceClient =        		serviceName+"Client";	// e.g.  CatalogServiceClient
 
 	// generate the names of the wrapper components:
-	var clientInterface = "I"+serviceClient;
-	var clientProxy = serviceClient+"Proxy";
-	var clientFactory = serviceClient+"Factory";
-	var clientFactoryInterface = clientInterface+"Factory";
+	string clientInterface =			"I"+serviceClient;		// e.g. ICatalogServiceClient
+	string clientProxy =				serviceClient+"Proxy";	// e.g.  CatalogServiceClientProxy
+	string clientFactory = 			serviceClient+"Factory";	// e.g.  CatalogServiceClientFactory
+	string clientFactoryInterface = clientInterface+"Factory";	// e.g. ICatalogServiceClientFactory
 
 	if (generateLogOutput) { #>
 // Generating WCFAbstractions for <#= serviceClient #> : <#= serviceInterface #>
